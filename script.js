@@ -53,7 +53,7 @@ window.addEventListener("DOMContentLoaded", () => {
       updateBackground();
       setInterval(updateBackground, 30000);
       // タイプライター開始
-      const mainText = "今日はあなたの特別な日です！\n素敵な一年になりますように🎉";
+      const mainText = "誕生日おめでとう！\n一日おいしいものたくさん食べてね！\今年は特に素敵な一年になりますように！";
       const overlay = document.getElementById("main-message-text");
       typeWriterEffect(overlay, mainText, 160);
     }
