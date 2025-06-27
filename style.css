@@ -1,0 +1,340 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.star-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: #0a183d;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}
+
+.main-message {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  /* animation: zoomIn 20s ease-in-out infinite; */
+  transition: background-image 1s ease-in-out;
+    opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1s cubic-bezier(.4,2,.6,1), transform 1s cubic-bezier(.4,2,.6,1);
+  
+}
+.main-message.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* @keyframes zoomIn {
+  0% { transform: scale(1);}
+  100% { transform: scale(1.1);}
+} */
+
+.overlay-text {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  max-width: 90%;
+  margin: 0 auto;
+  border-radius: 12px;
+  text-shadow: 0 0 10px #ff6f91, 0 0 20px #fff;
+  box-shadow: 0 0 30px 5px rgba(255, 111, 145, 0.2);
+}
+
+
+.scroll-down-to-see {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  background: rgba(255,255,255,0.85);
+  color: #ff6f91;
+  padding: 10px 18px;
+  border-radius: 24px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px #ffb6d555;
+  z-index: 11000;
+  font-family: 'Segoe UI', 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.05em;
+  animation: scrollhint-fade 1.5s infinite alternate;
+}
+
+@keyframes scrollhint-fade {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
+
+/* 初回メッセージのアニメーション */
+.welcome-message {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  font-family: 'Sacramento', cursive;
+  color: #11d3da;
+  z-index: 9999;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid rgba(255,255,255,0.75);
+  width: 0;
+  animation: typing 3s steps(20) forwards, blink 0.7s step-end infinite;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 300px }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: rgba(255,255,255,0.75); }
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 10000;
+  animation: confetti-fall linear forwards;
+}
+@keyframes confetti-fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0.7;
+  }
+}
+
+/* Mail Icons Wrapper */
+#mail-icons-wrapper {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 12000;
+  display: flex;
+  gap: 32px;
+  /* Only show when scrolled */
+  display: none;
+}
+
+/* Show wrapper when needed (JS will toggle this) */
+#mail-icons-wrapper.show {
+  display: flex;
+}
+
+#mail-icon, #mail-icon2 {
+  cursor: pointer;
+  width: 64px;
+  height: 64px;
+  transition: transform 0.2s;
+}
+
+#mail-icon.open .envelope-flap,
+#mail-icon2.open .envelope-flap {
+  animation: flap-open 0.5s forwards;
+}
+#mail-icon.open .envelope-shine,
+#mail-icon2.open .envelope-shine {
+  animation: shine 1s;
+}
+#mail-icon.open .envelope-letter,
+#mail-icon2.open .envelope-letter {
+  animation: letter-pop 0.7s forwards;
+}
+#mail-icon.open .envelope-heart,
+#mail-icon2.open .envelope-heart {
+  animation: heart-pop 0.7s forwards;
+}
+
+.envelope {
+  position: relative;
+  width: 64px;
+  height: 48px;
+}
+
+.envelope-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 64px;
+  height: 36px;
+  background: #fff;
+  border: 2px solid #ff6f91;
+  border-radius: 0 0 8px 8px;
+  z-index: 2;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 64px;
+  height: 32px;
+  background: #ff6f91;
+  border-radius: 0 0 32px 32px/0 0 32px 32px;
+  z-index: 3;
+  transform-origin: top center;
+  transition: transform 0.5s;
+}
+
+.envelope-shine {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  width: 32px;
+  height: 8px;
+  background: linear-gradient(90deg, #fff6, #fff0 70%);
+  border-radius: 8px;
+  opacity: 0.7;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.envelope-letter {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 48px;
+  height: 28px;
+  background: #fffbe8;
+  border-radius: 4px;
+  z-index: 1;
+  opacity: 0;
+}
+
+.envelope-heart {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 16px;
+  height: 16px;
+  transform: translateX(-50%) scale(0);
+  z-index: 5;
+}
+.envelope-heart::before,
+.envelope-heart::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  background: #ff6f91;
+  border-radius: 10px 10px 0 0;
+}
+.envelope-heart::before {
+  left: 3px;
+  transform: rotate(-45deg);
+}
+.envelope-heart::after {
+  left: 3px;
+  transform: rotate(45deg);
+}
+
+.envelope-shadow {
+  position: absolute;
+  bottom: -6px;
+  left: 8px;
+  width: 48px;
+  height: 8px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* Animations */
+@keyframes flap-open {
+  to { transform: rotateX(70deg); }
+}
+@keyframes shine {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; box-shadow: 0 0 24px 8px #fff9; }
+  100% { opacity: 0.7; box-shadow: none; }
+}
+@keyframes letter-pop {
+  0% { opacity: 0; transform: translateY(10px);}
+  100% { opacity: 1; transform: translateY(-10px);}
+}
+@keyframes heart-pop {
+  0% { transform: translateX(-50%) scale(0);}
+  60% { transform: translateX(-50%) scale(1.2);}
+  100% { transform: translateX(-50%) scale(1);}
+}
+
+/* Message Card Popup */
+#message-card-overlay,
+#message-card2-overlay {
+  display: none;
+  position: fixed;
+  z-index: 13000;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.4);
+  align-items: center;
+  justify-content: center;
+}
+
+#message-card,
+#message-card2 {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #ff6f9155;
+  padding: 32px 24px 24px 24px;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  position: relative;
+  animation: card-pop 0.5s;
+}
+@keyframes card-pop {
+  0% { transform: scale(0.7); opacity: 0;}
+  100% { transform: scale(1); opacity: 1;}
+}
+#close-message-card,
+#close-message-card2 {
+  position: absolute;
+  top: 12px; right: 18px;
+  font-size: 2rem;
+  color: #ff6f91;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+#close-message-card:hover,
+#close-message-card2:hover {
+  color: #ff2e63;
+}
